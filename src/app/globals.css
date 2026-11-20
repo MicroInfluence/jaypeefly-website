@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --color-obsidian: #08090B;
+  --color-charcoal: #111318;
+  --color-card: #17191F;
+  --color-ink: #FFFFFF;
+  --color-muted: #A7A9B0;
+  --color-accent: #F2A0C0;
+}
+
+:root {
+  color-scheme: dark;
+  --bg-obsidian: #08090B;
+  --bg-charcoal: #111318;
+  --bg-card: #17191F;
+  --text-white: #FFFFFF;
+  --text-secondary: #A7A9B0;
+  --accent-pink: #F2A0C0;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #08090B;
+  color: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *:not(.jpf-gate-animated),
+  *:not(.jpf-gate-animated)::before,
+  *:not(.jpf-gate-animated)::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Split Dumbbell Gate Intro — GPU-composited keyframes for reliable mobile & desktop playback */
+@keyframes jpfGateLeft {
+  0%,
+  46% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-102%, 0, 0);
+  }
+}
+
+@keyframes jpfGateRight {
+  0%,
+  46% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(102%, 0, 0);
+  }
+}
+
+@keyframes jpfDumbbellLeft {
+  0%,
+  24% {
+    transform: translate3d(0, -50%, 0);
+  }
+  42%,
+  100% {
+    transform: translate3d(-8px, -50%, 0);
+  }
+}
+
+@keyframes jpfDumbbellRight {
+  0%,
+  24% {
+    transform: translate3d(0, -50%, 0);
+  }
+  42%,
+  100% {
+    transform: translate3d(8px, -50%, 0);
+  }
+}
+
+@keyframes jpfSeamPulse {
+  0%,
+  22% {
+    opacity: 0.45;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: none;
+  }
+  35%,
+  52% {
+    opacity: 1;
+    background-color: #f2a0c0;
+    box-shadow: 0 0 24px rgba(242, 160, 192, 0.9);
+  }
+  100% {
+    opacity: 0;
+    background-color: #f2a0c0;
+    box-shadow: none;
+  }
+}
+
+@keyframes jpfGateContainerHide {
+  0%,
+  94% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.jpf-gate-container {
+  animation: jpfGateContainerHide 1.85s linear forwards;
+}
+
+.jpf-gate-left {
+  animation: jpfGateLeft 1.75s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.jpf-gate-right {
+  animation: jpfGateRight 1.75s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.jpf-dumbbell-left {
+  animation: jpfDumbbellLeft 1.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform;
+}
+
+.jpf-dumbbell-right {
+  animation: jpfDumbbellRight 1.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform;
+}
+
+.jpf-seam-pulse {
+  animation: jpfSeamPulse 1.75s ease-out forwards;
+}
+
+.jpf-gate-skip-left {
+  transform: translate3d(-102%, 0, 0);
+  transition: transform 360ms cubic-bezier(0.76, 0, 0.24, 1);
+  animation: none !important;
+}
+
+.jpf-gate-skip-right {
+  transform: translate3d(102%, 0, 0);
+  transition: transform 360ms cubic-bezier(0.76, 0, 0.24, 1);
+  animation: none !important;
+}
+
+body {
+  background-color: #08090B;
+  color: #FFFFFF;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background-color: rgba(242, 160, 192, 0.28);
+  color: #FFFFFF;
+}
+
+/* Subtle architectural grid texture for placeholder canvases & hero accents */
+.editorial-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hairline-border {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Consistent accessible keyboard focus ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #F2A0C0;
+  outline-offset: 2px;
+}
