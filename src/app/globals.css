@@ -159,7 +159,7 @@ html {
   animation: none !important;
 }
 
-/* Smooth Oxblood Atmospheric Top Glow on Sharp Black */
+/* Smooth Oxblood Atmospheric Glows on Sharp Black */
 .jpf-hero-glow {
   background-image: radial-gradient(
     ellipse 72% 46% at 50% -8%,
@@ -169,11 +169,38 @@ html {
   );
 }
 
+.jpf-glow-left {
+  background-image: radial-gradient(
+    ellipse 58% 68% at 0% 50%,
+    rgba(155, 28, 38, 0.26) 0%,
+    rgba(110, 14, 22, 0.1) 44%,
+    rgba(0, 0, 0, 0) 76%
+  );
+}
+
+.jpf-glow-right {
+  background-image: radial-gradient(
+    ellipse 58% 68% at 100% 50%,
+    rgba(155, 28, 38, 0.26) 0%,
+    rgba(110, 14, 22, 0.1) 44%,
+    rgba(0, 0, 0, 0) 76%
+  );
+}
+
+.jpf-glow-center {
+  background-image: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    rgba(155, 28, 38, 0.22) 0%,
+    rgba(110, 14, 22, 0.08) 46%,
+    rgba(0, 0, 0, 0) 78%
+  );
+}
+
 .jpf-cta-glow {
   background-image: radial-gradient(
     ellipse 65% 75% at 50% 100%,
-    rgba(155, 28, 38, 0.26) 0%,
-    rgba(11, 11, 13, 0) 72%
+    rgba(155, 28, 38, 0.3) 0%,
+    rgba(11, 11, 13, 0) 74%
   );
 }
 
@@ -249,7 +276,9 @@ html {
 
 /* Uniform Dark Surface Card (Consistent across every section) */
 .jpf-surface {
-  background-color: #0B0B0D;
+  background-color: rgba(11, 11, 13, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.11);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition: border-color 220ms ease, background-color 220ms ease;

@@ -80,7 +80,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. BRAND INTRODUCTION */}
-      <section className="bg-black py-14 sm:py-20 lg:py-24">
+      <section className="jpf-glow-right bg-black py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 lg:items-start">
             <div className="lg:col-span-6 flex flex-col gap-8">
@@ -145,7 +145,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. COACHING PREVIEW */}
-      <section className="bg-black py-14 sm:py-24">
+      <section className="jpf-glow-left bg-black py-14 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
@@ -224,7 +224,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. TRANSFORMATION PREVIEW */}
-      <section className="bg-black py-12 sm:py-16">
+      <section className="jpf-glow-center bg-black py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="jpf-surface rounded-2xl p-7 sm:p-10 lg:p-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading

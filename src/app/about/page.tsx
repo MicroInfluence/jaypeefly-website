@@ -141,7 +141,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
       {/* 2. CONTENT & RESOURCES VIA SOCIAL MEDIA */}
       <section
         id="resources"
-        className="border-t border-white/10 bg-black py-16 sm:py-24"
+        className="jpf-glow-left border-t border-white/10 bg-black py-16 sm:py-24"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-10">
           <SectionHeading
@@ -196,7 +196,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
       {/* 3. CONTACT & COACHING APPLICATION */}
       <section
         id="contact"
-        className="border-t border-white/10 bg-black py-16 sm:py-24"
+        className="jpf-glow-right border-t border-white/10 bg-black py-16 sm:py-24"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           <SectionHeading

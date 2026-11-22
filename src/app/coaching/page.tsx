@@ -29,7 +29,7 @@ export default function CoachingPage() {
       </section>
 
       {/* 2. PROGRAMME PRESENTATIONS (ONLINE & IN-PERSON) */}
-      <section className="bg-black pb-16 sm:pb-24">
+      <section className="jpf-glow-right bg-black pb-16 sm:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-10 sm:gap-12">
           {coachingContent.programmes.map((programme, idx) => {
             const isReversed = idx % 2 === 1;
@@ -122,7 +122,7 @@ export default function CoachingPage() {
       </section>
 
       {/* 3. HOW COACHING WORKS */}
-      <section className="border-t border-white/10 bg-black py-16 sm:py-24">
+      <section className="jpf-glow-left border-t border-white/10 bg-black py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           <SectionHeading
             eyebrow="THE PROCESS"
@@ -153,7 +153,7 @@ export default function CoachingPage() {
       {/* 4. TRANSFORMATIONS & CLIENT RESULTS */}
       <section
         id="transformations"
-        className="border-t border-white/10 bg-black py-16 sm:py-24"
+        className="jpf-glow-center border-t border-white/10 bg-black py-16 sm:py-24"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           <SectionHeading

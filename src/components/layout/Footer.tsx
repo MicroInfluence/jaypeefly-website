@@ -8,7 +8,7 @@ export function Footer() {
   const whatsappUrl = getWhatsAppUrl();
 
   return (
-    <footer className="border-t border-white/10 bg-[#050507] text-white">
+    <footer className="jpf-cta-glow border-t border-white/10 bg-[#050507] text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Brand Thesis */}
