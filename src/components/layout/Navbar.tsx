@@ -113,7 +113,7 @@ export function Navbar() {
           aria-label="Mobile Navigation"
           className="fixed inset-x-0 top-[4.75rem] sm:top-[5.5rem] bottom-0 z-[60] h-[calc(100dvh-4.75rem)] sm:h-[calc(100dvh-5.5rem)] overflow-y-auto border-t border-white/15 bg-black/95 backdrop-blur-2xl px-5 py-6 sm:px-6 sm:py-8 lg:hidden"
         >
-          <div className="mx-auto flex max-w-xl flex-col justify-between gap-8 min-h-full">
+          <div className="mx-auto flex max-w-xl flex-col gap-5">
             <nav aria-label="Mobile navigation" className="flex flex-col gap-2">
               {siteConfig.navItems.map((item, idx) => {
                 const isActive =
@@ -141,7 +141,7 @@ export function Navbar() {
               })}
             </nav>
 
-            <div className="border-t border-white/10 pt-5 pb-4">
+            <div className="border-t border-white/10 pt-5">
               <Link
                 href={siteConfig.primaryCta.href}
                 onClick={() => setMobileOpen(false)}
