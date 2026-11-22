@@ -25,10 +25,10 @@ export default function HomePage() {
                 {siteConfig.founderName} · {siteConfig.positioning}
               </p>
 
-              <h1 className="font-heading text-[2.25rem] sm:text-6xl lg:text-[4.15rem] font-extrabold uppercase tracking-[-0.03em] leading-[1.03] text-white">
-                <span className="text-[#D63B47]">TRANSFORM</span> YOUR BODY.
+              <h1 className="font-editorial text-[2rem] sm:text-5xl lg:text-[3.5rem] font-semibold tracking-[-0.015em] leading-[1.12] text-white">
+                <span className="italic text-[#D63B47]">Transform</span> Your Body.
                 <br />
-                REBUILD YOUR MINDSET.
+                Rebuild Your <span className="italic">Mindset.</span>
               </h1>
 
               <p className="text-base sm:text-lg text-[#A7A9B0] leading-relaxed max-w-xl">

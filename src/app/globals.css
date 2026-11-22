@@ -2,7 +2,8 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: var(--font-playfair), Georgia, "Times New Roman", serif;
   --color-obsidian: #000000;
   --color-charcoal: #0B0B0D;
   --color-card: #111114;
@@ -272,7 +273,11 @@ h2,
 h3,
 h4,
 .font-heading {
-  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-editorial {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
 }
 
 ::selection {
