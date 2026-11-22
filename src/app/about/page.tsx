@@ -13,7 +13,7 @@ import { CoachingApplicationForm } from "@/components/contact/CoachingApplicatio
 export const metadata: Metadata = {
   title: "About, Resources & Contact | Patrick Jeremy (JAYPEEFLY)",
   description:
-    "Meet Patrick Jeremy (JAYPEEFLY), Registered Gym Coach at iFitness Abuja. Access fitness resources on his official socials, message on WhatsApp, or apply for coaching.",
+    "Meet Patrick Jeremy (JAYPEEFLY), NASM Certified Trainer and Registered Gym Coach at iFitness Abuja. Access fitness resources on his official socials, message on WhatsApp, or apply for coaching.",
 };
 
 interface AboutPageProps {
@@ -81,14 +81,14 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
                 ))}
               </div>
 
-              {/* Confirmed Gym Experience & Coaching Base */}
+              {/* Confirmed Credentials & Gym Experience */}
               <div className="jpf-surface rounded-2xl p-6 flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#D63B47]">
-                    Gym Background & Experience
+                    Credentials & Gym Experience
                   </p>
-                  <span className="font-mono text-[11px] text-[#A7A9B0]">
-                    Registered Gym Coach
+                  <span className="font-mono text-[11px] text-white/85">
+                    {aboutContent.certification} · Registered Gym Coach
                   </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -22,6 +22,7 @@ export interface NavItem {
 export const siteConfig = {
   brandName: "JAYPEEFLY",
   founderName: "Patrick Jeremy",
+  certification: "NASM Certified Trainer",
   positioning: "Fitness & Lifestyle Modification Expert",
   corePillars: ["Fat Loss", "Mindset", "Habits", "Accountability"] as const,
   supportingMessage: "Helping You Transform And Stay Accountable.",
@@ -29,9 +30,9 @@ export const siteConfig = {
     "Fitness is the starting point. Lifestyle transformation is the bigger goal.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://jaypeefly.com",
   defaultTitle:
-    "JAYPEEFLY | Patrick Jeremy | Fitness & Lifestyle Modification Expert",
+    "JAYPEEFLY | Patrick Jeremy | NASM Certified Trainer",
   defaultDescription:
-    "Personal fitness coaching, sustainable fat loss, mindset development, habit building, and accountability with Patrick Jeremy (JAYPEEFLY). Online and in-person coaching for lasting lifestyle transformation.",
+    "Personal fitness coaching with Patrick Jeremy (JAYPEEFLY), NASM Certified Trainer and Lifestyle Modification Expert. Sustainable fat loss, mindset development, habit building, and accountability.",
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },

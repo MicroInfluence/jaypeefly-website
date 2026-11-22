@@ -22,7 +22,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">
             <div className="lg:col-span-7 flex flex-col gap-5 sm:gap-7">
               <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-[#D63B47]">
-                {siteConfig.founderName} · {siteConfig.positioning}
+                {siteConfig.founderName} · {siteConfig.certification}
               </p>
 
               <h1 className="font-editorial text-[2rem] sm:text-5xl lg:text-[3.5rem] font-semibold tracking-[-0.015em] leading-[1.12] text-white">
