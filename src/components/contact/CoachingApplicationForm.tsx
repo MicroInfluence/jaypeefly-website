@@ -17,24 +17,21 @@ interface FormValues {
   fullName: string;
   email: string;
   phone: string;
-  age: string;
   location: string;
-  preferredFormat: FormatOption;
+  preferredFormat: FormatOption | "";
   primaryGoal: string;
-  fitnessExperience: string;
   currentChallenges: string;
-  whyStart: string;
-  additionalInfo: string;
   privacyConsent: boolean;
-  website: string; // honeypot
+  website: string;
 }
 
-function normalizeFormat(param?: string): FormatOption {
-  if (!param) return "Not Sure";
+function normalizeFormat(param?: string): FormatOption | "" {
+  if (!param) return "";
   const lower = param.toLowerCase();
   if (lower === "online") return "Online";
   if (lower === "in-person" || lower === "inperson") return "In-Person";
-  return "Not Sure";
+  if (lower === "not-sure" || lower === "notsure") return "Not Sure";
+  return "";
 }
 
 export function CoachingApplicationForm({
@@ -44,14 +41,10 @@ export function CoachingApplicationForm({
     fullName: "",
     email: "",
     phone: "",
-    age: "",
     location: "",
     preferredFormat: normalizeFormat(initialFormat),
     primaryGoal: "",
-    fitnessExperience: "",
     currentChallenges: "",
-    whyStart: "",
-    additionalInfo: "",
     privacyConsent: false,
     website: "",
   });
@@ -85,10 +78,7 @@ export function CoachingApplicationForm({
     event.preventDefault();
     setServerError("");
 
-    const parsed = coachingApplicationSchema.safeParse({
-      ...values,
-      age: values.age,
-    });
+    const parsed = coachingApplicationSchema.safeParse(values);
 
     if (!parsed.success) {
       const nextErrors: Record<string, string> = {};
@@ -149,24 +139,23 @@ export function CoachingApplicationForm({
     return (
       <div
         id="coaching-application-form"
-        className="border border-[#F2A0C0]/40 bg-[#111318] p-7 sm:p-10 flex flex-col gap-5"
+        className="jpf-surface rounded-2xl p-7 sm:p-10 flex flex-col gap-5"
         role="status"
         aria-live="polite"
       >
-        <div className="inline-flex w-fit items-center gap-2 border border-[#F2A0C0]/40 bg-[#F2A0C0]/10 px-3 py-1.5 font-heading text-xs uppercase tracking-[0.18em] text-[#F2A0C0]">
+        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#9B1C26]/50 bg-[#9B1C26]/15 px-3.5 py-1.5 font-heading text-xs uppercase tracking-[0.16em] text-[#D63B47]">
           <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
           Application Received
         </div>
 
-        <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white">
+        <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
           Thank You, {values.fullName}.
         </h2>
 
         <p className="text-sm sm:text-base text-[#A7A9B0] leading-relaxed">
           Your JAYPEEFLY coaching application has been securely recorded for
           Patrick Jeremy to review. You will be contacted via the email or
-          phone/WhatsApp details you provided to discuss your goals, preferred
-          format ({values.preferredFormat}), availability, and next steps.
+          phone/WhatsApp details you provided.
         </p>
 
         {submissionId ? (
@@ -183,21 +172,17 @@ export function CoachingApplicationForm({
                 fullName: "",
                 email: "",
                 phone: "",
-                age: "",
                 location: "",
-                preferredFormat: "Not Sure",
+                preferredFormat: "",
                 primaryGoal: "",
-                fitnessExperience: "",
                 currentChallenges: "",
-                whyStart: "",
-                additionalInfo: "",
                 privacyConsent: false,
                 website: "",
               });
               setSubmissionId(null);
               setSubmitState("idle");
             }}
-            className="border border-white/15 px-5 py-3 font-heading text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:border-[#F2A0C0] hover:text-[#F2A0C0]"
+            className="jpf-glass-btn rounded-full px-6 py-3 font-heading text-xs font-semibold uppercase tracking-[0.14em]"
           >
             Submit Another Application
           </button>
@@ -207,7 +192,7 @@ export function CoachingApplicationForm({
   }
 
   const inputBaseClass =
-    "w-full border bg-[#08090B] px-4 py-3 text-base sm:text-sm text-white placeholder:text-white/30 transition-colors focus:border-[#F2A0C0] focus:outline-none";
+    "w-full rounded-xl border bg-black px-4 py-3 text-base sm:text-sm text-white placeholder:text-white/30 transition-colors focus:border-[#9B1C26] focus:outline-none";
 
   const errorClass = (name: string) =>
     fieldErrors[name] ? "border-rose-400" : "border-white/15";
@@ -217,22 +202,17 @@ export function CoachingApplicationForm({
       id="coaching-application-form"
       onSubmit={handleSubmit}
       noValidate
-      className="border border-white/10 bg-[#111318] p-5 sm:p-8 lg:p-10 flex flex-col gap-6 sm:gap-7"
+      className="jpf-surface rounded-2xl p-6 sm:p-8 lg:p-10 flex flex-col gap-6 sm:gap-7"
     >
       <div className="flex flex-col gap-2 border-b border-white/10 pb-6">
-        <span className="font-heading text-xs uppercase tracking-[0.2em] text-[#F2A0C0]">
+        <span className="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#D63B47]">
           Option 02 · Coaching Application
         </span>
-        <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white">
+        <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
           Apply for Personal Coaching
         </h2>
-        <p className="text-sm text-[#A7A9B0] leading-relaxed">
-          Provide honest details about your starting point, lifestyle, and goals
-          so Patrick can give you a meaningful response.
-        </p>
       </div>
 
-      {/* Global Server / Validation Alert */}
       {submitState === "error" && serverError ? (
         <div
           role="alert"
@@ -246,7 +226,6 @@ export function CoachingApplicationForm({
         </div>
       ) : null}
 
-      {/* Honeypot Field (hidden from real users) */}
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
@@ -260,14 +239,13 @@ export function CoachingApplicationForm({
         />
       </div>
 
-      {/* Personal Details Grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label
             htmlFor="fullName"
             className="text-xs font-heading uppercase tracking-[0.14em] text-white"
           >
-            Full Name <span className="text-[#F2A0C0]">*</span>
+            Full Name <span className="text-[#D63B47]">*</span>
           </label>
           <input
             id="fullName"
@@ -293,7 +271,7 @@ export function CoachingApplicationForm({
             htmlFor="email"
             className="text-xs font-heading uppercase tracking-[0.14em] text-white"
           >
-            Email Address <span className="text-[#F2A0C0]">*</span>
+            Email Address <span className="text-[#D63B47]">*</span>
           </label>
           <input
             id="email"
@@ -319,7 +297,7 @@ export function CoachingApplicationForm({
             htmlFor="phone"
             className="text-xs font-heading uppercase tracking-[0.14em] text-white"
           >
-            Phone / WhatsApp Number <span className="text-[#F2A0C0]">*</span>
+            Phone / WhatsApp Number <span className="text-[#D63B47]">*</span>
           </label>
           <input
             id="phone"
@@ -340,67 +318,36 @@ export function CoachingApplicationForm({
           ) : null}
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="age"
-              className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-            >
-              Age <span className="text-[#F2A0C0]">*</span>
-            </label>
-            <input
-              id="age"
-              name="age"
-              type="number"
-              min={16}
-              max={100}
-              required
-              placeholder="e.g. 28"
-              value={values.age}
-              onChange={(e) => updateField("age", e.target.value)}
-              aria-invalid={Boolean(fieldErrors.age)}
-              aria-describedby={fieldErrors.age ? "age-error" : undefined}
-              className={`${inputBaseClass} ${errorClass("age")}`}
-            />
-            {fieldErrors.age ? (
-              <p id="age-error" className="text-xs text-rose-300">
-                {fieldErrors.age}
-              </p>
-            ) : null}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="location"
-              className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-            >
-              Location <span className="text-[#F2A0C0]">*</span>
-            </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              required
-              placeholder="City, Country"
-              value={values.location}
-              onChange={(e) => updateField("location", e.target.value)}
-              aria-invalid={Boolean(fieldErrors.location)}
-              aria-describedby={fieldErrors.location ? "location-error" : undefined}
-              className={`${inputBaseClass} ${errorClass("location")}`}
-            />
-            {fieldErrors.location ? (
-              <p id="location-error" className="text-xs text-rose-300">
-                {fieldErrors.location}
-              </p>
-            ) : null}
-          </div>
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="location"
+            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
+          >
+            Location <span className="text-[#D63B47]">*</span>
+          </label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            required
+            placeholder="City, Country"
+            value={values.location}
+            onChange={(e) => updateField("location", e.target.value)}
+            aria-invalid={Boolean(fieldErrors.location)}
+            aria-describedby={fieldErrors.location ? "location-error" : undefined}
+            className={`${inputBaseClass} ${errorClass("location")}`}
+          />
+          {fieldErrors.location ? (
+            <p id="location-error" className="text-xs text-rose-300">
+              {fieldErrors.location}
+            </p>
+          ) : null}
         </div>
       </div>
 
-      {/* Preferred Format Selector */}
       <fieldset className="flex flex-col gap-3">
         <legend className="text-xs font-heading uppercase tracking-[0.14em] text-white">
-          Preferred Coaching Format <span className="text-[#F2A0C0]">*</span>
+          Preferred Coaching Format <span className="text-[#D63B47]">*</span>
         </legend>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {coachingFormatOptions.map((option) => {
@@ -408,10 +355,10 @@ export function CoachingApplicationForm({
             return (
               <label
                 key={option}
-                className={`flex cursor-pointer items-center justify-between border px-4 py-3.5 text-sm transition-colors ${
+                className={`flex cursor-pointer items-center justify-between rounded-xl border px-4 py-3.5 text-sm transition-colors ${
                   isSelected
-                    ? "border-[#F2A0C0] bg-[#F2A0C0]/10 text-white"
-                    : "border-white/15 bg-[#08090B] text-[#A7A9B0] hover:border-white/30"
+                    ? "border-[#9B1C26] bg-[#9B1C26]/20 text-white"
+                    : "border-white/15 bg-black text-[#A7A9B0] hover:border-white/30 hover:text-white"
                 }`}
               >
                 <span className="font-medium">{option}</span>
@@ -421,7 +368,7 @@ export function CoachingApplicationForm({
                   value={option}
                   checked={isSelected}
                   onChange={() => updateField("preferredFormat", option)}
-                  className="accent-[#F2A0C0] h-4 w-4"
+                  className="accent-[#9B1C26] h-4 w-4"
                 />
               </label>
             );
@@ -432,155 +379,64 @@ export function CoachingApplicationForm({
         ) : null}
       </fieldset>
 
-      {/* Goals & Background */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="primaryGoal"
-            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-          >
-            Primary Fitness Goal <span className="text-[#F2A0C0]">*</span>
-          </label>
-          <input
-            id="primaryGoal"
-            name="primaryGoal"
-            type="text"
-            required
-            placeholder="e.g. Sustainable fat loss, strength, daily routine"
-            value={values.primaryGoal}
-            onChange={(e) => updateField("primaryGoal", e.target.value)}
-            aria-invalid={Boolean(fieldErrors.primaryGoal)}
-            aria-describedby={
-              fieldErrors.primaryGoal ? "primaryGoal-error" : undefined
-            }
-            className={`${inputBaseClass} ${errorClass("primaryGoal")}`}
-          />
-          {fieldErrors.primaryGoal ? (
-            <p id="primaryGoal-error" className="text-xs text-rose-300">
-              {fieldErrors.primaryGoal}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="fitnessExperience"
-            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-          >
-            Fitness Experience <span className="text-[#F2A0C0]">*</span>
-          </label>
-          <input
-            id="fitnessExperience"
-            name="fitnessExperience"
-            type="text"
-            required
-            placeholder="e.g. Complete beginner, returning after a break, consistent gym-goer"
-            value={values.fitnessExperience}
-            onChange={(e) => updateField("fitnessExperience", e.target.value)}
-            aria-invalid={Boolean(fieldErrors.fitnessExperience)}
-            aria-describedby={
-              fieldErrors.fitnessExperience
-                ? "fitnessExperience-error"
-                : undefined
-            }
-            className={`${inputBaseClass} ${errorClass("fitnessExperience")}`}
-          />
-          {fieldErrors.fitnessExperience ? (
-            <p id="fitnessExperience-error" className="text-xs text-rose-300">
-              {fieldErrors.fitnessExperience}
-            </p>
-          ) : null}
-        </div>
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="primaryGoal"
+          className="text-xs font-heading uppercase tracking-[0.14em] text-white"
+        >
+          Primary Fitness Goal <span className="text-[#D63B47]">*</span>
+        </label>
+        <input
+          id="primaryGoal"
+          name="primaryGoal"
+          type="text"
+          required
+          placeholder="e.g. Sustainable fat loss, strength, daily routine"
+          value={values.primaryGoal}
+          onChange={(e) => updateField("primaryGoal", e.target.value)}
+          aria-invalid={Boolean(fieldErrors.primaryGoal)}
+          aria-describedby={
+            fieldErrors.primaryGoal ? "primaryGoal-error" : undefined
+          }
+          className={`${inputBaseClass} ${errorClass("primaryGoal")}`}
+        />
+        {fieldErrors.primaryGoal ? (
+          <p id="primaryGoal-error" className="text-xs text-rose-300">
+            {fieldErrors.primaryGoal}
+          </p>
+        ) : null}
       </div>
 
-      {/* Challenges & Motivation */}
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="currentChallenges"
-            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-          >
-            Current Challenges <span className="text-[#F2A0C0]">*</span>
-          </label>
-          <textarea
-            id="currentChallenges"
-            name="currentChallenges"
-            rows={3}
-            required
-            placeholder="What currently holds you back—consistency, busy schedule, nutrition habits, accountability?"
-            value={values.currentChallenges}
-            onChange={(e) => updateField("currentChallenges", e.target.value)}
-            aria-invalid={Boolean(fieldErrors.currentChallenges)}
-            aria-describedby={
-              fieldErrors.currentChallenges
-                ? "currentChallenges-error"
-                : undefined
-            }
-            className={`${inputBaseClass} ${errorClass("currentChallenges")}`}
-          />
-          {fieldErrors.currentChallenges ? (
-            <p id="currentChallenges-error" className="text-xs text-rose-300">
-              {fieldErrors.currentChallenges}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="whyStart"
-            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-          >
-            Why Do You Want to Start This Journey?{" "}
-            <span className="text-[#F2A0C0]">*</span>
-          </label>
-          <textarea
-            id="whyStart"
-            name="whyStart"
-            rows={3}
-            required
-            placeholder="What makes transforming your body, mindset, and habits important right now?"
-            value={values.whyStart}
-            onChange={(e) => updateField("whyStart", e.target.value)}
-            aria-invalid={Boolean(fieldErrors.whyStart)}
-            aria-describedby={fieldErrors.whyStart ? "whyStart-error" : undefined}
-            className={`${inputBaseClass} ${errorClass("whyStart")}`}
-          />
-          {fieldErrors.whyStart ? (
-            <p id="whyStart-error" className="text-xs text-rose-300">
-              {fieldErrors.whyStart}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="additionalInfo"
-            className="text-xs font-heading uppercase tracking-[0.14em] text-white"
-          >
-            Additional Information (Optional)
-          </label>
-          <textarea
-            id="additionalInfo"
-            name="additionalInfo"
-            rows={3}
-            placeholder="Anything else you would like Patrick to know—injuries, equipment access, or schedule notes."
-            value={values.additionalInfo}
-            onChange={(e) => updateField("additionalInfo", e.target.value)}
-            aria-invalid={Boolean(fieldErrors.additionalInfo)}
-            aria-describedby={
-              fieldErrors.additionalInfo ? "additionalInfo-error" : undefined
-            }
-            className={`${inputBaseClass} ${errorClass("additionalInfo")}`}
-          />
-          {fieldErrors.additionalInfo ? (
-            <p id="additionalInfo-error" className="text-xs text-rose-300">
-              {fieldErrors.additionalInfo}
-            </p>
-          ) : null}
-        </div>
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="currentChallenges"
+          className="text-xs font-heading uppercase tracking-[0.14em] text-white"
+        >
+          Current Challenges <span className="text-[#D63B47]">*</span>
+        </label>
+        <textarea
+          id="currentChallenges"
+          name="currentChallenges"
+          rows={3}
+          required
+          placeholder="What currently holds you back? Consistency, busy schedule, nutrition habits, accountability?"
+          value={values.currentChallenges}
+          onChange={(e) => updateField("currentChallenges", e.target.value)}
+          aria-invalid={Boolean(fieldErrors.currentChallenges)}
+          aria-describedby={
+            fieldErrors.currentChallenges
+              ? "currentChallenges-error"
+              : undefined
+          }
+          className={`${inputBaseClass} ${errorClass("currentChallenges")}`}
+        />
+        {fieldErrors.currentChallenges ? (
+          <p id="currentChallenges-error" className="text-xs text-rose-300">
+            {fieldErrors.currentChallenges}
+          </p>
+        ) : null}
       </div>
 
-      {/* Privacy & Consent */}
       <div className="flex flex-col gap-2 border-t border-white/10 pt-5">
         <label className="flex items-start gap-3 cursor-pointer">
           <input
@@ -593,13 +449,11 @@ export function CoachingApplicationForm({
             aria-describedby={
               fieldErrors.privacyConsent ? "privacyConsent-error" : undefined
             }
-            className="mt-1 h-4 w-4 shrink-0 accent-[#F2A0C0]"
+            className="mt-1 h-4 w-4 shrink-0 accent-[#D63B47]"
           />
           <span className="text-xs sm:text-sm text-[#A7A9B0] leading-relaxed">
-            I consent to Patrick Jeremy (JAYPEEFLY) reviewing the information in
-            this coaching application and contacting me regarding coaching
-            options. Submitted details are kept confidential and are never sold
-            or shared publicly.
+            I consent to Patrick Jeremy (JAYPEEFLY) reviewing this coaching
+            application and contacting me regarding coaching options.
           </span>
         </label>
         {fieldErrors.privacyConsent ? (
@@ -612,7 +466,7 @@ export function CoachingApplicationForm({
       <button
         type="submit"
         disabled={submitState === "submitting"}
-        className="inline-flex w-full items-center justify-center gap-2.5 bg-[#F2A0C0] px-7 py-4 font-heading text-xs font-bold uppercase tracking-[0.18em] text-[#08090B] transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="jpf-oxblood-btn inline-flex w-full items-center justify-center gap-2.5 rounded-full px-7 py-4 font-heading text-xs font-semibold uppercase tracking-[0.14em] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submitState === "submitting" ? (
           <>

@@ -1,33 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { aboutContent } from "@/content/about";
 import { siteConfig } from "@/content/site";
 import { editorialMedia } from "@/content/media";
 import { EditorialPhoto } from "@/components/ui/EditorialPhoto";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { FinalCtaSection } from "@/components/ui/FinalCtaSection";
+import { SocialIcon } from "@/components/ui/SocialIcon";
+import { WhatsAppEnquiryCard } from "@/components/contact/WhatsAppEnquiryCard";
+import { CoachingApplicationForm } from "@/components/contact/CoachingApplicationForm";
 
 export const metadata: Metadata = {
-  title: "About Patrick Jeremy (JAYPEEFLY)",
+  title: "About, Resources & Contact | Patrick Jeremy (JAYPEEFLY)",
   description:
-    "Meet Patrick Jeremy, Fitness & Lifestyle Modification Expert behind JAYPEEFLY. Explore the philosophy uniting fat loss, mindset, healthy habits, and personal accountability.",
+    "Meet Patrick Jeremy (JAYPEEFLY), Registered Gym Coach at iFitness Abuja. Access fitness resources on his official socials, message on WhatsApp, or apply for coaching.",
 };
 
-export default function AboutPage() {
-  const confirmedCredentials = aboutContent.credentials.filter(
-    (c) => c.confirmed
-  );
-  const populatedBioFields = aboutContent.editableProfileDetails.filter(
-    (f) => f.value && f.value.trim().length > 0
-  );
+interface AboutPageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export default async function AboutPage({ searchParams }: AboutPageProps) {
+  const params = await searchParams;
+  const rawFormat = params.format;
+  const initialFormat = Array.isArray(rawFormat) ? rawFormat[0] : rawFormat;
 
   return (
     <>
-      {/* 1. ABOUT HERO & PERSONAL INTRODUCTION */}
-      <section className="bg-[#08090B] pt-14 pb-20 sm:pt-20 sm:pb-28">
+      {/* 1. BIO & PERSONAL INTRODUCTION */}
+      <section className="jpf-hero-glow bg-black -mt-[5.25rem] sm:-mt-[6rem] pt-28 pb-16 sm:pt-36 sm:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start lg:gap-16">
             <div className="lg:col-span-5">
               <EditorialPhoto
                 slot={editorialMedia.aboutPortrait}
@@ -44,8 +47,8 @@ export default function AboutPage() {
                 description={aboutContent.heroSubheadline}
               />
 
-              <div className="border-t border-white/10 pt-7 flex flex-col gap-5">
-                <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white leading-snug">
+              <div className="border-t border-white/10 pt-7 flex flex-col gap-4">
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-snug">
                   {aboutContent.personalIntroduction.title}
                 </h2>
                 {aboutContent.personalIntroduction.paragraphs.map((paragraph) => (
@@ -58,17 +61,17 @@ export default function AboutPage() {
                 ))}
               </div>
 
-              {/* Dual Identities Summary */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              {/* Dual Identities: uniform dark surfaces */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {siteConfig.identities.map((identity) => (
                   <div
                     key={identity.index}
-                    className="border border-white/10 bg-[#111318] p-5 flex flex-col gap-2"
+                    className="jpf-surface rounded-2xl p-5 flex flex-col gap-2"
                   >
-                    <span className="font-mono text-xs text-[#F2A0C0]">
+                    <span className="font-mono text-xs font-semibold text-[#D63B47]">
                       {identity.index}
                     </span>
-                    <h3 className="font-heading text-lg font-semibold text-white">
+                    <h3 className="font-heading text-lg font-bold text-white">
                       {identity.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#A7A9B0] leading-relaxed">
@@ -78,117 +81,55 @@ export default function AboutPage() {
                 ))}
               </div>
 
-              {/* Confirmed Gym Experience */}
-              {aboutContent.gymExperience.length > 0 ? (
-                <div className="border border-white/10 bg-[#111318] p-6 flex flex-col gap-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="font-heading text-xs uppercase tracking-[0.18em] text-[#F2A0C0]">
-                      Gym Background & Experience
-                    </p>
-                    <span className="font-mono text-[11px] text-[#A7A9B0]">
-                      Registered Gym Coach
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {aboutContent.gymExperience.map((gym, idx) => (
-                      <div
-                        key={gym.name}
-                        className="border border-white/10 bg-[#08090B] px-4 py-3.5 flex items-center justify-between gap-3"
-                      >
-                        <div>
-                          <p className="font-heading text-base font-semibold text-white">
-                            {gym.name}
-                          </p>
-                          <p className="text-xs text-[#A7A9B0] mt-0.5">
-                            {gym.note}
-                          </p>
-                        </div>
-                        <span className="font-mono text-xs text-[#F2A0C0]">
-                          0{idx + 1}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+              {/* Confirmed Gym Experience & Coaching Base */}
+              <div className="jpf-surface rounded-2xl p-6 flex flex-col gap-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#D63B47]">
+                    Gym Background & Experience
+                  </p>
+                  <span className="font-mono text-[11px] text-[#A7A9B0]">
+                    Registered Gym Coach
+                  </span>
                 </div>
-              ) : null}
-
-              {/* Confirmed Credentials & Editable Biography Details */}
-              {confirmedCredentials.length > 0 || populatedBioFields.length > 0 ? (
-                <div className="border border-white/10 bg-[#111318] p-6 flex flex-col gap-5">
-                  {confirmedCredentials.length > 0 ? (
-                    <div className="flex flex-col gap-3">
-                      <p className="font-heading text-xs uppercase tracking-[0.18em] text-[#F2A0C0]">
-                        Verified Credentials
-                      </p>
-                      <ul className="flex flex-col gap-2">
-                        {confirmedCredentials.map((cred) => (
-                          <li
-                            key={cred.id}
-                            className="flex items-center gap-2.5 text-sm text-white"
-                          >
-                            <ShieldCheck
-                              className="h-4 w-4 text-[#F2A0C0]"
-                              aria-hidden="true"
-                            />
-                            <span>
-                              {cred.title} — {cred.issuer}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-
-                  {populatedBioFields.map((field) => (
-                    <div key={field.label} className="flex flex-col gap-1">
-                      <p className="font-heading text-xs uppercase tracking-[0.16em] text-[#F2A0C0]">
-                        {field.label}
-                      </p>
-                      <p className="text-sm text-[#A7A9B0] leading-relaxed">
-                        {field.value}
-                      </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {aboutContent.gymExperience.map((gym, idx) => (
+                    <div
+                      key={gym.name}
+                      className="rounded-xl border border-white/10 bg-black px-4 py-3.5 flex items-center justify-between gap-3"
+                    >
+                      <div>
+                        <p className="font-heading text-base font-semibold text-white">
+                          {gym.name}
+                        </p>
+                        <p className="text-xs text-[#A7A9B0] mt-0.5">
+                          {gym.note}
+                        </p>
+                      </div>
+                      <span className="font-mono text-xs font-semibold text-[#D63B47]">
+                        0{idx + 1}
+                      </span>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="border border-dashed border-white/15 bg-[#111318] p-5 flex flex-col gap-2">
-                  <p className="font-heading text-[11px] uppercase tracking-[0.18em] text-[#F2A0C0]">
-                    Editable Biography & Credential Verification
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#A7A9B0] leading-relaxed">
-                    Personal career timeline, background milestones, and public
-                    credential badges (such as NASM-Certified Trainer noted on{" "}
-                    <a
-                      href="https://www.instagram.com/jerixih"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white underline decoration-[#F2A0C0] underline-offset-4"
-                    >
-                      @jerixih
-                    </a>
-                    ) are cleanly isolated in{" "}
-                    <code className="font-mono text-xs text-white bg-[#17191F] px-1.5 py-0.5 border border-white/10">
-                      src/content/about.ts
-                    </code>{" "}
-                    so only verified details confirmed by Patrick are displayed
-                    publicly.
-                  </p>
-                </div>
-              )}
+                <p className="border-t border-white/10 pt-3 text-xs sm:text-sm text-[#A7A9B0]">
+                  <span className="text-white font-medium">Primary Base:</span>{" "}
+                  {aboutContent.coachingBase}
+                </p>
+              </div>
 
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap gap-3.5 pt-2">
+                <a
+                  href="#contact"
+                  className="jpf-oxblood-btn inline-flex items-center gap-2 rounded-full px-7 py-4 font-heading text-xs font-semibold uppercase tracking-[0.14em]"
+                >
+                  Contact & Apply Now
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
                 <Link
                   href="/coaching"
-                  className="inline-flex items-center gap-2 bg-[#F2A0C0] px-7 py-4 font-heading text-xs font-bold uppercase tracking-[0.18em] text-[#08090B] transition-colors hover:bg-white"
+                  className="jpf-glass-btn inline-flex items-center gap-2 rounded-full px-7 py-4 font-heading text-xs font-semibold uppercase tracking-[0.14em]"
                 >
-                  Explore Coaching Programmes
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 border border-white/20 px-7 py-4 font-heading text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:border-white"
-                >
-                  Start Your Journey
+                  Coaching & Results
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -197,89 +138,129 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. FIVE CORE PHILOSOPHY CHAPTERS */}
-      <section className="border-t border-white/10 bg-[#111318] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-16">
+      {/* 2. CONTENT & RESOURCES VIA SOCIAL MEDIA */}
+      <section
+        id="resources"
+        className="border-t border-white/10 bg-black py-16 sm:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-10">
           <SectionHeading
-            eyebrow="PRINCIPLES & METHODOLOGY"
-            title="THE FIVE PILLARS OF PATRICK'S COACHING."
-            description="Every coaching relationship balances physical execution with sustainable daily habits and personal responsibility."
+            eyebrow="CONTENT & RESOURCES"
+            title="FOR MORE CONTENT & RESOURCES, FOLLOW PATRICK ON SOCIAL MEDIA."
+            description="Looking for workout videos, fat-loss education, daily habit tips, or behind-the-scenes gym updates from Patrick Jeremy (JAYPEEFLY)? All content and free resources are published directly on his official channels below."
           />
 
-          <div className="flex flex-col divide-y divide-white/10 border-y border-white/10">
-            {aboutContent.philosophies.map((section) => (
-              <article
-                key={section.id}
-                id={section.id}
-                className="py-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start"
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {siteConfig.socialProfiles.map((profile) => (
+              <a
+                key={profile.id}
+                href={profile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="jpf-surface group rounded-2xl flex flex-col justify-between gap-6 p-6"
               >
-                <div className="lg:col-span-4 flex flex-col gap-3">
-                  <span className="font-mono text-xs text-[#F2A0C0]">
-                    {section.number} · {section.eyebrow}
-                  </span>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white">
-                    {section.title}
-                  </h2>
-                  <p className="text-sm sm:text-base font-medium text-white/90 leading-relaxed">
-                    {section.lead}
-                  </p>
-                </div>
-
-                <div className="lg:col-span-5 flex flex-col gap-4">
-                  {section.paragraphs.map((text) => (
-                    <p
-                      key={text}
-                      className="text-sm sm:text-base text-[#A7A9B0] leading-relaxed"
-                    >
-                      {text}
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 font-heading text-xs font-semibold uppercase tracking-[0.16em] text-[#D63B47]">
+                      <SocialIcon platform={profile.id} className="h-4 w-4" />
+                      {profile.platform}
+                    </span>
+                    <ArrowUpRight
+                      className="h-4 w-4 text-[#A7A9B0] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#D63B47]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-mono text-xs text-white/60">
+                      {profile.handle}
                     </p>
-                  ))}
-                </div>
-
-                <div className="lg:col-span-3 border border-white/10 bg-[#08090B] p-5">
-                  <p className="font-heading text-[11px] uppercase tracking-[0.18em] text-[#A7A9B0] mb-3">
-                    Core Focus
+                    <h3 className="mt-1 font-heading text-lg font-bold text-white group-hover:text-[#D63B47] transition-colors">
+                      {profile.role}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#A7A9B0] leading-relaxed">
+                    {profile.description}
                   </p>
-                  <ul className="flex flex-col gap-2.5">
-                    {section.principles.map((principle) => (
-                      <li
-                        key={principle}
-                        className="flex items-start gap-2.5 text-xs sm:text-sm text-white/90"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#F2A0C0]"
-                        />
-                        <span>{principle}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              </article>
-            ))}
-          </div>
 
-          {/* Training & Behind-the-Scenes Visual Slots */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <EditorialPhoto
-              slot={editorialMedia.trainingAction}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <EditorialPhoto
-              slot={editorialMedia.behindTheScenes}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+                <div className="border-t border-white/10 pt-3.5 flex items-center gap-1.5 font-heading text-xs uppercase tracking-[0.14em] text-white">
+                  <Play className="h-3 w-3 text-[#D63B47]" aria-hidden="true" />
+                  Visit {profile.platform}
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. FINAL CTA */}
-      <FinalCtaSection
-        headline="READY TO BUILD A LIFESTYLE YOU CAN SUSTAIN?"
-        description="Explore Online or In-Person Coaching with Patrick Jeremy, or submit your coaching application today."
-        secondaryHref="/coaching"
-        secondaryLabel="View Coaching Formats"
-      />
+      {/* 3. CONTACT & COACHING APPLICATION */}
+      <section
+        id="contact"
+        className="border-t border-white/10 bg-black py-16 sm:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
+          <SectionHeading
+            eyebrow="CONTACT & START YOUR JOURNEY"
+            title="GET IN TOUCH WITH PATRICK JEREMY."
+            description="Message directly on WhatsApp, connect on social media, or apply for Online or In-Person coaching below."
+          />
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <WhatsAppEnquiryCard />
+
+              <div className="jpf-surface rounded-2xl p-6 sm:p-8 flex flex-col gap-5">
+                <div>
+                  <p className="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#D63B47]">
+                    Direct Social Links
+                  </p>
+                  <h3 className="mt-2 font-heading text-xl font-bold text-white">
+                    Message or Follow Official Profiles
+                  </h3>
+                </div>
+
+                <div className="flex flex-col divide-y divide-white/10">
+                  {siteConfig.socialProfiles.map((profile) => (
+                    <a
+                      key={profile.id}
+                      href={profile.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between py-4 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <SocialIcon
+                          platform={profile.id}
+                          className="h-4 w-4 text-[#D63B47]"
+                        />
+                        <div>
+                          <p className="text-sm font-medium text-white group-hover:text-[#D63B47] transition-colors">
+                            {profile.platform}
+                          </p>
+                          <p className="font-mono text-xs text-[#A7A9B0]">
+                            {profile.handle}
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowUpRight
+                        className="h-4 w-4 text-[#A7A9B0] group-hover:text-[#D63B47]"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <CoachingApplicationForm
+                key={initialFormat ?? "default"}
+                initialFormat={initialFormat}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

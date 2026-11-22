@@ -47,7 +47,7 @@ export async function POST(request: Request) {
         ok: false,
         code: "BACKEND_NOT_CONFIGURED",
         error:
-          "Application database (Supabase) is not configured yet. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables, or reach out via Patrick's official social channels.",
+          "Application database is not connected yet. Please reach out directly via WhatsApp (+234 915 120 8241).",
       },
       { status: 503 }
     );
@@ -68,14 +68,10 @@ export async function POST(request: Request) {
       full_name: data.fullName,
       email: data.email,
       phone: data.phone,
-      age: data.age,
       location: data.location,
       preferred_format: data.preferredFormat,
       primary_goal: data.primaryGoal,
-      fitness_experience: data.fitnessExperience,
       current_challenges: data.currentChallenges,
-      why_start: data.whyStart,
-      additional_info: data.additionalInfo || "",
       privacy_consent: data.privacyConsent,
     })
     .select("id, created_at")
@@ -88,7 +84,7 @@ export async function POST(request: Request) {
         ok: false,
         code: "DATABASE_ERROR",
         error:
-          "We could not save your application right now. Please try again shortly or connect via WhatsApp / official social channels.",
+          "We could not save your application right now. Please try again shortly or message Patrick on WhatsApp.",
       },
       { status: 500 }
     );

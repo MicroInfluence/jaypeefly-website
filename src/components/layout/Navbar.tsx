@@ -31,25 +31,25 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#08090B]/95 backdrop-blur-md">
-        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-50 px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-2 pointer-events-none">
+        <div className="jpf-liquid-nav pointer-events-auto mx-auto flex h-14 sm:h-16 max-w-6xl items-center justify-between rounded-full px-5 sm:px-7">
           {/* Brand Wordmark */}
           <Link
             href="/"
             onClick={() => setMobileOpen(false)}
             className="group flex flex-col leading-none"
-            aria-label="JAYPEEFLY — Patrick Jeremy Home"
+            aria-label="JAYPEEFLY | Patrick Jeremy Home"
           >
-            <span className="font-heading text-base sm:text-xl font-bold tracking-[0.14em] text-white transition-colors group-hover:text-[#F2A0C0]">
-              {siteConfig.brandName}
+            <span className="font-heading text-sm sm:text-lg font-bold tracking-[0.14em] text-white">
+              JAYPEE<span className="text-[#D63B47]">FLY</span>
             </span>
-            <span className="mt-1 text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.24em] text-[#A7A9B0]">
+            <span className="mt-0.5 text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.22em] text-white/60">
               {siteConfig.founderName}
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-7">
+          {/* Desktop Navigation: consistent pill-bar links */}
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-2">
             {siteConfig.navItems.map((item) => {
               const isActive =
                 item.href === "/"
@@ -60,29 +60,23 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative py-2 text-xs font-medium uppercase tracking-[0.16em] transition-colors ${
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-white"
-                      : "text-[#A7A9B0] hover:text-white"
+                      ? "bg-white/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]"
+                      : "text-white/75 hover:bg-white/[0.08] hover:text-white"
                   }`}
                 >
                   {item.label}
-                  {isActive ? (
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#F2A0C0]"
-                    />
-                  ) : null}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Primary CTA + Mobile Hamburger Toggle */}
+          {/* Primary Oxblood Liquid Pill CTA + Mobile Hamburger Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             <Link
               href={siteConfig.primaryCta.href}
-              className="hidden sm:inline-flex items-center gap-2 bg-white px-5 py-2.5 font-heading text-xs font-semibold uppercase tracking-[0.16em] text-[#08090B] transition-all duration-300 hover:bg-[#F2A0C0]"
+              className="jpf-oxblood-btn hidden sm:inline-flex items-center gap-1.5 rounded-full px-5 py-2 font-heading text-xs font-semibold uppercase tracking-[0.12em]"
             >
               {siteConfig.primaryCta.label}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -94,10 +88,10 @@ export function Navbar() {
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation-drawer"
               aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
-              className={`relative z-[70] inline-flex h-11 w-11 touch-manipulation items-center justify-center border transition-colors lg:hidden ${
+              className={`relative z-[70] inline-flex h-10 w-10 touch-manipulation items-center justify-center rounded-full transition-colors lg:hidden ${
                 mobileOpen
-                  ? "border-[#F2A0C0] bg-[#F2A0C0] text-[#08090B]"
-                  : "border-white/15 bg-[#111318] text-white hover:border-[#F2A0C0] hover:text-[#F2A0C0]"
+                  ? "jpf-oxblood-btn"
+                  : "jpf-glass-btn"
               }`}
             >
               {mobileOpen ? (
@@ -117,10 +111,10 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation"
-          className="fixed inset-x-0 top-16 sm:top-20 bottom-0 z-[60] h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] overflow-y-auto border-t border-white/10 bg-[#08090B] px-5 py-6 sm:px-6 sm:py-8 lg:hidden"
+          className="fixed inset-x-0 top-[4.75rem] sm:top-[5.5rem] bottom-0 z-[60] h-[calc(100dvh-4.75rem)] sm:h-[calc(100dvh-5.5rem)] overflow-y-auto border-t border-white/15 bg-black/95 backdrop-blur-2xl px-5 py-6 sm:px-6 sm:py-8 lg:hidden"
         >
           <div className="mx-auto flex max-w-xl flex-col justify-between gap-8 min-h-full">
-            <nav aria-label="Mobile navigation" className="flex flex-col divide-y divide-white/10">
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-2">
               {siteConfig.navItems.map((item, idx) => {
                 const isActive =
                   item.href === "/"
@@ -132,12 +126,14 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`flex items-center justify-between py-3.5 font-heading text-lg font-medium tracking-tight transition-colors ${
-                      isActive ? "text-[#F2A0C0]" : "text-white hover:text-[#F2A0C0]"
+                    className={`flex items-center justify-between rounded-2xl px-5 py-4 font-heading text-lg font-medium tracking-tight transition-colors ${
+                      isActive
+                        ? "bg-white/12 border border-white/20 text-white"
+                        : "border border-transparent text-white/80 hover:bg-white/[0.06] hover:text-white"
                     }`}
                   >
                     <span>{item.label}</span>
-                    <span className="font-mono text-xs text-[#A7A9B0]">
+                    <span className="font-mono text-xs text-white/50">
                       0{idx + 1}
                     </span>
                   </Link>
@@ -149,7 +145,7 @@ export function Navbar() {
               <Link
                 href={siteConfig.primaryCta.href}
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex w-full items-center justify-center gap-2 bg-[#F2A0C0] px-6 py-4 font-heading text-xs font-bold uppercase tracking-[0.18em] text-[#08090B] transition-colors hover:bg-white"
+                className="jpf-oxblood-btn inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 font-heading text-xs font-semibold uppercase tracking-[0.14em]"
               >
                 {siteConfig.primaryCta.label}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

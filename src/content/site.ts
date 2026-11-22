@@ -29,20 +29,17 @@ export const siteConfig = {
     "Fitness is the starting point. Lifestyle transformation is the bigger goal.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://jaypeefly.com",
   defaultTitle:
-    "JAYPEEFLY | Patrick Jeremy — Fitness & Lifestyle Modification Expert",
+    "JAYPEEFLY | Patrick Jeremy | Fitness & Lifestyle Modification Expert",
   defaultDescription:
     "Personal fitness coaching, sustainable fat loss, mindset development, habit building, and accountability with Patrick Jeremy (JAYPEEFLY). Online and in-person coaching for lasting lifestyle transformation.",
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Coaching", href: "/coaching" },
-    { label: "Transformations", href: "/transformations" },
-    { label: "Resources", href: "/resources" },
-    { label: "Contact", href: "/contact" },
   ] satisfies NavItem[],
   primaryCta: {
     label: "START YOUR JOURNEY",
-    href: "/contact",
+    href: "/about#contact",
   },
   identities: [
     {

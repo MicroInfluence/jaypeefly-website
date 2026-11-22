@@ -81,7 +81,7 @@ export function DumbbellGateIntro() {
             setDismissed(true);
           }
         }}
-        className={`jpf-gate-animated absolute inset-y-0 left-0 w-1/2 overflow-hidden border-r border-white/15 bg-[#08090B] editorial-grid-bg ${
+        className={`jpf-gate-animated absolute inset-y-0 left-0 w-1/2 overflow-hidden border-r border-white/15 bg-[#08090B] ${
           skipping ? "jpf-gate-skip-left" : "jpf-gate-left"
         }`}
       >
@@ -133,7 +133,7 @@ export function DumbbellGateIntro() {
               y1="30"
               x2="44"
               y2="110"
-              stroke="#F2A0C0"
+              stroke="#9B1C26"
               strokeOpacity="0.65"
               strokeWidth="1.5"
             />
@@ -168,7 +168,7 @@ export function DumbbellGateIntro() {
               height="48"
               rx="2"
               fill="#111318"
-              stroke="#F2A0C0"
+              stroke="#9B1C26"
               strokeWidth="1.5"
             />
 
@@ -188,7 +188,7 @@ export function DumbbellGateIntro() {
             <line x1="150" y1="62" x2="150" y2="78" stroke="#A7A9B0" strokeOpacity="0.45" strokeWidth="1" />
             <line x1="158" y1="62" x2="158" y2="78" stroke="#A7A9B0" strokeOpacity="0.45" strokeWidth="1" />
             {/* Center Lock Pin Edge */}
-            <rect x="173" y="55" width="7" height="30" fill="#F2A0C0" />
+            <rect x="173" y="55" width="7" height="30" fill="#9B1C26" />
           </svg>
         </div>
 
@@ -202,7 +202,7 @@ export function DumbbellGateIntro() {
 
       {/* RIGHT GATE DOOR */}
       <div
-        className={`jpf-gate-animated absolute inset-y-0 right-0 w-1/2 overflow-hidden border-l border-white/15 bg-[#08090B] editorial-grid-bg ${
+        className={`jpf-gate-animated absolute inset-y-0 right-0 w-1/2 overflow-hidden border-l border-white/15 bg-[#08090B] ${
           skipping ? "jpf-gate-skip-right" : "jpf-gate-right"
         }`}
       >
@@ -213,7 +213,7 @@ export function DumbbellGateIntro() {
 
         {/* Top half wordmark aligned to center seam */}
         <div className="absolute left-2.5 sm:left-6 top-1/2 -translate-y-[74px] sm:-translate-y-[112px] text-left">
-          <span className="font-heading text-lg sm:text-3xl font-bold uppercase tracking-[0.22em] sm:tracking-[0.26em] text-[#F2A0C0]">
+          <span className="font-heading text-lg sm:text-3xl font-bold uppercase tracking-[0.22em] sm:tracking-[0.26em] text-[#D63B47]">
             FLY
           </span>
         </div>
@@ -226,7 +226,7 @@ export function DumbbellGateIntro() {
             fill="none"
           >
             {/* Center Lock Pin Edge */}
-            <rect x="0" y="55" width="7" height="30" fill="#F2A0C0" />
+            <rect x="0" y="55" width="7" height="30" fill="#9B1C26" />
             {/* Right Half of Knurled Steel Bar starting from seam (x=0) */}
             <rect
               x="0"
@@ -251,7 +251,7 @@ export function DumbbellGateIntro() {
               height="48"
               rx="2"
               fill="#111318"
-              stroke="#F2A0C0"
+              stroke="#9B1C26"
               strokeWidth="1.5"
             />
 
@@ -293,7 +293,7 @@ export function DumbbellGateIntro() {
               y1="30"
               x2="136"
               y2="110"
-              stroke="#F2A0C0"
+              stroke="#9B1C26"
               strokeOpacity="0.65"
               strokeWidth="1.5"
             />

@@ -7,15 +7,6 @@ export interface CoachingProgramme {
   formatLabel: string;
   idealFor: string;
   description: string;
-  /**
-   * Leave as `null` until Patrick confirms exact duration.
-   */
-  duration: string | null;
-  /**
-   * Leave as `null` until Patrick confirms exact pricing.
-   * UI displays "Enquire for Pricing" whenever null.
-   */
-  pricing: string | null;
   focusAreas: {
     title: string;
     detail: string;
@@ -29,9 +20,7 @@ export const coachingContent = {
   eyebrow: "COACHING PROGRAMMES",
   headline: "STRUCTURED COACHING BUILT FOR REAL LIFE.",
   subheadline:
-    "Two coaching formats designed around fitness development, fat loss, daily habit architecture, and consistent accountability—confirmed around your goals during consultation.",
-  deliverablesDisclaimer:
-    "Exact coaching deliverables, session schedules, duration, and investment are confirmed directly with Patrick Jeremy following your enquiry so your plan matches your goals and commitments without guesswork.",
+    "Two coaching formats built around fitness development, fat loss, daily habit architecture, and direct accountability.",
   programmes: [
     {
       id: "online",
@@ -39,16 +28,14 @@ export const coachingContent = {
       tagline: "Remote Coaching, Structure & Accountability",
       formatLabel: "Remote / Online Format",
       idealFor:
-        "Individuals anywhere seeking structured fitness direction, sustainable fat-loss support, habit building, and ongoing accountability.",
+        "Individuals anywhere seeking structured training direction, fat-loss support, and remote accountability.",
       description:
-        "Designed for people who want clear training and lifestyle structure they can execute from home or their local gym, supported by remote coaching communication and consistent progress monitoring.",
-      duration: null,
-      pricing: null,
+        "Clear training and lifestyle structure you can follow from home or your local gym, supported by remote check-ins and consistent progress monitoring.",
       focusAreas: [
         {
           title: "Fitness Guidance",
           detail:
-            "Structured training direction tailored to your equipment access, current level, and weekly schedule.",
+            "Structured training direction tailored to your equipment access and weekly schedule.",
         },
         {
           title: "Fat-Loss Support",
@@ -58,25 +45,15 @@ export const coachingContent = {
         {
           title: "Habit Development",
           detail:
-            "Step-by-step lifestyle adjustments covering daily movement, routines, and consistency.",
+            "Daily movement and routine targets designed to stick through busy weeks.",
         },
         {
-          title: "Accountability",
+          title: "Remote Accountability",
           detail:
-            "Regular accountability checkpoints to keep focus high when life gets demanding.",
-        },
-        {
-          title: "Progress Monitoring",
-          detail:
-            "Ongoing tracking and adjustment based on real feedback and measurable consistency.",
-        },
-        {
-          title: "Remote Coaching Communication",
-          detail:
-            "Clear communication channels arranged upon onboarding to review progress and resolve roadblocks.",
+            "Consistent progress tracking and direct check-ins to resolve roadblocks early.",
         },
       ],
-      enquiryHref: "/contact?format=online",
+      enquiryHref: "/about?format=online#contact",
       ctaLabel: "Enquire About Online Coaching",
       media: editorialMedia.onlineCoaching,
     },
@@ -86,39 +63,32 @@ export const coachingContent = {
       tagline: "Hands-On Training at iFitness Abuja & Direct Accountability",
       formatLabel: "Physical / In-Person · iFitness Abuja",
       idealFor:
-        "Clients in Abuja seeking direct, face-to-face physical classes with a Registered Gym Coach at iFitness Abuja for exercise execution, progression, and accountability.",
+        "Clients in Abuja seeking face-to-face physical classes with a Registered Gym Coach at iFitness Abuja.",
       description:
-        "Conducted in person at iFitness Abuja, where Patrick works as a Registered Gym Coach leading physical classes—combining hands-on coaching guidance, real-time feedback, progress monitoring, and holistic lifestyle support.",
-      duration: null,
-      pricing: null,
+        "Conducted in person at iFitness Abuja, where Patrick works as a Registered Gym Coach, combining live technique coaching, physical progression, and lifestyle accountability.",
       focusAreas: [
         {
           title: "Personal Training",
           detail:
-            "Direct in-person physical classes at iFitness Abuja focused on safe technique, proper pacing, and purposeful effort.",
+            "Direct physical classes at iFitness Abuja focused on safe technique and purposeful effort.",
         },
         {
-          title: "Fitness Guidance",
+          title: "Strength & Conditioning",
           detail:
-            "Coached strength, conditioning, and movement development adapted to your starting point.",
+            "Coached strength, stamina, and movement development adapted to your starting point.",
         },
         {
-          title: "Physical Progress Monitoring",
+          title: "Progress Monitoring",
           detail:
-            "Consistent observation of strength, stamina, posture, and overall physical progression.",
+            "Live observation of form, posture, work capacity, and physical progression.",
         },
         {
-          title: "Accountability",
+          title: "Lifestyle Accountability",
           detail:
-            "Committed session structure and direct follow-through that remove guesswork and hesitation.",
-        },
-        {
-          title: "Lifestyle Support",
-          detail:
-            "Guidance extending beyond the training hour to reinforce discipline, mindset, and daily habits.",
+            "Guidance beyond the gym hour to reinforce discipline and daily consistency.",
         },
       ],
-      enquiryHref: "/contact?format=in-person",
+      enquiryHref: "/about?format=in-person#contact",
       ctaLabel: "Enquire About In-Person Coaching",
       media: editorialMedia.inPersonCoaching,
     },
@@ -128,47 +98,25 @@ export const coachingContent = {
       step: "01",
       title: "Submit Your Application",
       description:
-        "Share your primary goal, current experience, daily challenges, and preferred coaching format via the application form or WhatsApp.",
+        "Share your goal, current challenges, and preferred coaching format via the application form or WhatsApp.",
     },
     {
       step: "02",
       title: "Consultation & Alignment",
       description:
-        "Patrick reviews your application and discusses availability, physical class scheduling at iFitness Abuja (for in-person) or remote setup (for online), programme scope, and pricing.",
+        "Patrick reviews your application and aligns on physical class scheduling at iFitness Abuja or remote coaching setup and pricing.",
     },
     {
       step: "03",
       title: "Establish Your Structure",
       description:
-        "Begin with clear fitness guidance, fat-loss fundamentals, and practical daily habit targets suited to your reality.",
+        "Start with clear training guidance, fat-loss fundamentals, and daily habit targets built around your schedule.",
     },
     {
       step: "04",
-      title: "Monitor & Stay Accountable",
+      title: "Track & Stay Accountable",
       description:
-        "Review progress consistently, refine what is needed, and build the discipline that turns early momentum into a permanent lifestyle.",
+        "Review progress consistently and build the discipline that turns momentum into a lasting lifestyle.",
     },
   ],
-  faqs: [
-    {
-      question: "Do I need prior gym experience before applying?",
-      answer:
-        "No. JAYPEEFLY welcomes beginners as well as experienced individuals—regardless of gender, age, or starting fitness level. Training and habit progression start from where you are today.",
-    },
-    {
-      question: "Why does the website say 'Enquire for Pricing'?",
-      answer:
-        "Coaching details and investment depend on your chosen format, support needs, and schedule. Patrick confirms exact pricing and availability transparently during your enquiry before any commitment is made.",
-    },
-    {
-      question: "What if I am unsure between Online and In-Person Coaching?",
-      answer:
-        "Select 'Not Sure' on the coaching application form. Based on your location, goals, and schedule, Patrick will advise which format fits best.",
-    },
-    {
-      question: "Are results guaranteed in a fixed number of weeks?",
-      answer:
-        "Honest coaching never promises unrealistic overnight shortcuts. Outcomes depend on consistent training, nutrition habits, and follow-through—and Patrick is there to keep you structured and accountable throughout.",
-    },
-  ],
-} as const;
+};

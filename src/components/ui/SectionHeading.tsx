@@ -22,18 +22,12 @@ export function SectionHeading({
     align === "center" ? "mx-auto text-center items-center" : "items-start";
 
   return (
-    <div className={`flex flex-col gap-4 ${alignmentClasses} ${className}`}>
-      <div className="inline-flex items-center gap-3">
-        <span
-          aria-hidden="true"
-          className="h-[1px] w-7 bg-[#F2A0C0] inline-block"
-        />
-        <span className="font-heading text-xs font-medium uppercase tracking-[0.22em] text-[#F2A0C0]">
-          {eyebrow}
-        </span>
-      </div>
+    <div className={`flex flex-col gap-3.5 ${alignmentClasses} ${className}`}>
+      <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-[#D63B47]">
+        {eyebrow}
+      </span>
 
-      <HeadingTag className="font-heading text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] leading-[1.08] text-white max-w-4xl">
+      <HeadingTag className="font-heading text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-[-0.02em] leading-[1.1] text-white max-w-4xl">
         {title}
       </HeadingTag>
 
